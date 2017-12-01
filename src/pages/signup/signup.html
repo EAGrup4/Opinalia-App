@@ -35,6 +35,11 @@
         <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
       </ion-item>
 
+      <ion-item>
+        <ion-label fixed>{{ 'VERIFY PASSWORD' | translate }}</ion-label>
+        <ion-input type="password" [(ngModel)]="account.password2" name="password2"></ion-input>
+      </ion-item>
+
       <div padding>
         <button ion-button color="primary" block>{{ 'SIGNUP_BUTTON' | translate }}</button>
       </div>
