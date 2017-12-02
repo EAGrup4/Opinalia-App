@@ -45,7 +45,6 @@ export class User {
     }, err => {
       console.error('ERROR', err);
     });
-
     return seq;
   }
 
@@ -58,7 +57,7 @@ export class User {
 
     seq.subscribe((res: any) => {
       // If the API returned a successful response, mark the user as logged in
-      if (res.status == 'success') {
+      if (res.code == 'success') {
         this._loggedIn(res);
       }
     }, err => {

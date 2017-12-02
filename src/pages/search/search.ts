@@ -19,14 +19,14 @@ export class SearchPage {
    * Perform a service for the proper items.
    */
   getItems(ev) {
-    let val = ev.target.value;
+    /*let val = ev.target.value;
     if (!val || !val.trim()) {
       this.currentItems = [];
       return;
     }
     this.currentItems = this.items.query({
       name: val
-    });
+    });*/
   }
 
   /**

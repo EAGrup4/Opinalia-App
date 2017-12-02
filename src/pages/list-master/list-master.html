@@ -18,11 +18,12 @@
     <ion-item-sliding *ngFor="let item of currentItems">
       <button ion-item (click)="openItem(item)">
         <ion-avatar item-start>
-          <img [src]="item.profilePic" />
+          <!--<img [src]="item.profilePic"/>-->
+          <img  src="assets/img/speakers/elephant.jpg" />
         </ion-avatar>
         <h2>{{item.name}}</h2>
-        <p>{{item.about}}</p>
-        <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
+        <p>{{item.company}}</p>
+        <ion-note item-end *ngIf="item.avgRate">{{item.avgRate}}</ion-note>
       </button>
 
       <ion-item-options>
