@@ -18,7 +18,7 @@ export class Items {
 
       {
         "name": "MacBook Pro",
-        "profilePic": "assets/img/speakers/elephant.jpg",
+        "profilePic": "assets/img/speakers/photo.jpg",
         "about": "RAM: 8Gb"
       }
     ];
