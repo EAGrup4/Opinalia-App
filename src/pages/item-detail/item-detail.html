@@ -8,14 +8,46 @@
 
 
 <ion-content>
-<div class="item-profile">
+  <ion-card>
   <img  src="assets/img/speakers/photo.jpg" align="middle" height="400" width="400" />
-  </div>
-<br>
-  <div class="item-detail" padding>
-    <h2>Nombre: {{item.name}}</h2>
-    <h4>Categoria: {{item.category}}</h4>
-    <h4>Compañia: {{item.company}}</h4>
-    <h4>Puntuación media: {{item.avgRate}}</h4>
-  </div>
+  <ion-card-content>
+    <ion-card-title>
+    {{item.name}}
+  </ion-card-title>
+    <p>
+      {{item.company}}
+    </p>
+  </ion-card-content>
+
+    <ion-item>
+      <ion-icon name='phone-portrait' item-start style="color: #d03e84"></ion-icon>
+      Categoria
+      <ion-badge item-end>{{item.category}}</ion-badge>
+    </ion-item>
+   <ion-item>
+     <ion-icon name='create' item-start style="color: #55acee"></ion-icon>
+     Puntuación media
+     <ion-badge item-end>{{item.avgRate}}</ion-badge>
+
+   </ion-item>
+
+
+  </ion-card>
+
+
+  <ion-card>
+
+    <ion-card-header>
+      {{item.ratings.title}}
+    </ion-card-header>
+
+    <ion-card-content>
+      Comentario: {{item.ratings.comment}}
+    </ion-card-content>
+    <ion-card-content>
+      Valoración: {{item.ratings.comment}}
+    </ion-card-content>
+  </ion-card>
+
+
 </ion-content>

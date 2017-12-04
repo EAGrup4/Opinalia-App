@@ -3,18 +3,18 @@
   <ion-navbar>
     <ion-title>{{ 'Lista de productos' | translate }}</ion-title>
 
-    <ion-buttons end>
+   <!-- <ion-buttons end>
       <button ion-button icon-only (click)="addItem()">
         <ion-icon name="add"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons>-->
   </ion-navbar>
 
 </ion-header>
 
 <ion-content>
-
   <ion-list>
+
     <ion-item-sliding *ngFor="let item of currentItems">
       <button ion-item (click)="openItem(item)">
         <ion-avatar item-start>
@@ -25,7 +25,6 @@
         <p>{{item.company}}</p>
         <ion-note item-end *ngIf="item.avgRate">{{item.avgRate}}</ion-note>
       </button>
-
       <ion-item-options>
         <button ion-button color="danger" (click)="deleteItem(item)">
           {{ 'DELETE_BUTTON' | translate }}
