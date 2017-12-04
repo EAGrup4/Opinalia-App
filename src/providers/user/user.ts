@@ -2,6 +2,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { Injectable } from '@angular/core';
 
+
 import { Api } from '../api/api';
 
 /**
@@ -59,6 +60,25 @@ export class User {
       // If the API returned a successful response, mark the user as logged in
       if (res.code == 'success') {
         this._loggedIn(res);
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
+  update(accountInfo:any, user:any){
+    let userId=user._id;
+    let token=user.token;
+    let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': token });
+    console.log(headers)
+    let seq = this.api.post(`users/`+userId, accountInfo, {headers:headers}).share();
+
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      if (res.code == 'success') {
+        console.log("ok");
       }
     }, err => {
       console.error('ERROR', err);

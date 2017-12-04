@@ -8,7 +8,7 @@
 
 
 <ion-content>
-  <form>
+  <form (submit)="doUpdate()">
   <!--<form (submit)="doLogin()">-->
     <ion-list>
 
@@ -29,11 +29,10 @@
 
       <div padding>
       <button ion-button color="primary" block>{{ 'Actualizar' | translate }}</button>
-    </div>
-      <div padding>
-        <button ion-button color="danger" block>{{ 'Borrar cuenta' | translate }}</button>
       </div>
-
     </ion-list>
   </form>
+  <div padding>
+    <button ion-button color="danger" block>{{ 'Borrar cuenta' | translate }}</button>
+  </div>
 </ion-content>

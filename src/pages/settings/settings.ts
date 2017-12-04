@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-import { Settings } from '../../providers/providers';
+import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import {Settings, User} from '../../providers/providers';
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider
@@ -25,7 +25,7 @@ export class SettingsPage {
 
   settingsReady = false;
 
-  form: FormGroup;
+  //form: FormGroup;
 
   profileSettings = {
     page: 'profile',
@@ -39,9 +39,39 @@ export class SettingsPage {
   subSettings: any = SettingsPage;
 
   constructor(public navCtrl: NavController,
+    public user: User,
     public settings: Settings,
+    public toastCtrl: ToastController,
     public formBuilder: FormBuilder,
     public navParams: NavParams,
-    public translate: TranslateService) {
+    public translate: TranslateService,
+    private storage:Storage) {
+  }
+
+  doUpdate(){
+    let user:any;
+    this.storage.get('user').then((resp) => {
+      user=resp;
+      console.log(user)
+      this.user.update(this.account,user).subscribe((resp) => {
+        let usr:any;
+        usr=resp;
+        this.storage.set('user', usr);
+        let toast = this.toastCtrl.create({
+          message: "Usuario actualizado",
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      }, (err) => {
+        // Unable to log in
+        let toast = this.toastCtrl.create({
+          message: "Error al actualizar",
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      });
+    });
   }
 }
