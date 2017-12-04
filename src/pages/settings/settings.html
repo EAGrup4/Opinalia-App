@@ -1,7 +1,39 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ pageTitle }}</ion-title>
+    <ion-title>{{ 'Mi cuenta' | translate }}</ion-title>
   </ion-navbar>
 
 </ion-header>
+
+
+<ion-content>
+  <form>
+  <!--<form (submit)="doLogin()">-->
+    <ion-list>
+
+      <ion-item>
+        <ion-label fixed>{{ 'Email' | translate }}</ion-label>
+        <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>{{ 'Nombre' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="account.name" name="name"></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label fixed>{{ 'Contraseña' | translate }}</ion-label>
+        <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+      </ion-item>
+
+      <div padding>
+      <button ion-button color="primary" block>{{ 'Actualizar' | translate }}</button>
+    </div>
+      <div padding>
+        <button ion-button color="danger" block>{{ 'Borrar cuenta' | translate }}</button>
+      </div>
+
+    </ion-list>
+  </form>
+</ion-content>

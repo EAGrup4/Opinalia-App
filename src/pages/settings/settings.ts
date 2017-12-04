@@ -16,6 +16,10 @@ import { Settings } from '../../providers/providers';
   templateUrl: 'settings.html'
 })
 export class SettingsPage {
+  account: { email: string, password: string } = {
+    email: '',
+    password: ''
+  };
   // Our local settings object
   options: any;
 
