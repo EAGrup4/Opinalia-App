@@ -35,17 +35,17 @@
   </ion-card>
 
 
-  <ion-card>
+  <ion-card *ngFor="let rating of item.ratings">
 
     <ion-card-header>
-      {{item.ratings.title}}
+      {{rating.title}}
     </ion-card-header>
 
     <ion-card-content>
-      Comentario: {{item.ratings.comment}}
+      Comentario: {{rating.comment}}
     </ion-card-content>
     <ion-card-content>
-      Valoración: {{item.ratings.comment}}
+      Valoración: {{rating.rate}}
     </ion-card-content>
   </ion-card>
 
