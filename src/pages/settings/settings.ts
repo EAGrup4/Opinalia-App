@@ -5,6 +5,7 @@ import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angul
 import { Storage } from '@ionic/storage';
 import {Settings, User} from '../../providers/providers';
 import { AlertController } from 'ionic-angular';
+import {LoginPage} from "../login/login";
 /**
  * The Settings page is a simple form that syncs with a Settings provider
  * to enable the user to customize settings for the app.
@@ -147,6 +148,8 @@ export class SettingsPage {
                   position: 'top'
                 });
                 toast.present();
+                this.navCtrl.push(LoginPage);
+
               }, (err) => {
                 // Unable to log in
                 let toast = this.toastCtrl.create({
@@ -163,6 +166,10 @@ export class SettingsPage {
       ]
     });
     alert.present();
+  }
+
+  cerrarsesion(){
+    this.navCtrl.push(LoginPage);
   }
   /*
   doDelete(){
