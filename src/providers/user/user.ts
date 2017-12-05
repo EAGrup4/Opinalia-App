@@ -70,10 +70,7 @@ export class User {
 
   update(accountInfo:any, user:any){
     let userId=user._id;
-    let token=user.token;
-    let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': token });
-    console.log(headers)
-    let seq = this.api.post(`users/`+userId, accountInfo, {headers:headers}).share();
+    let seq = this.api.post(`users/update/`+userId, accountInfo).share();
 
     seq.subscribe((res: any) => {
       // If the API returned a successful response, mark the user as logged in

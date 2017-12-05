@@ -40,7 +40,6 @@ export class LoginPage {
       let user:any;
       user=resp;
       this.storage.set('user', user);
-      console.log(user.token);
       this.navCtrl.push(MainPage);
     }, (err) => {
       // Unable to log in
