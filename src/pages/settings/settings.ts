@@ -6,6 +6,8 @@ import { Storage } from '@ionic/storage';
 import {Settings, User} from '../../providers/providers';
 import { AlertController } from 'ionic-angular';
 import {LoginPage} from "../login/login";
+import {LoginPageModule} from "../login/login.module";
+import {WelcomePage} from "../welcome/welcome";
 /**
  * The Settings page is a simple form that syncs with a Settings provider
  * to enable the user to customize settings for the app.
@@ -148,7 +150,7 @@ export class SettingsPage {
                   position: 'top'
                 });
                 toast.present();
-                this.navCtrl.push(LoginPage);
+                this.navCtrl.push(WelcomePage);
 
               }, (err) => {
                 // Unable to log in
@@ -169,7 +171,7 @@ export class SettingsPage {
   }
 
   cerrarsesion(){
-    this.navCtrl.push(LoginPage);
+    this.navCtrl.push(WelcomePage);
   }
   /*
   doDelete(){
