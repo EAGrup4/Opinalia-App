@@ -120,6 +120,51 @@ export class SettingsPage {
       });
     });
   }*/
+
+  confirm2() {
+    let alert = this.alertCtrl.create({
+      title: 'Borrar cuenta',
+      message: '¿Estás seguro que quieres borrar tu cuenta?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Tu cuenta sigue activa');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            let user:any;
+            this.storage.get('user').then((resp) => {
+              user=resp;
+              console.log(user);
+              this.user.deleteuser(user).subscribe((resp) => {
+                let toast = this.toastCtrl.create({
+                  message: "Usuario borrado",
+                  duration: 3000,
+                  position: 'top'
+                });
+                toast.present();
+              }, (err) => {
+                // Unable to log in
+                let toast = this.toastCtrl.create({
+                  message: "Error al borrar el usuario",
+                  duration: 3000,
+                  position: 'top'
+                });
+                toast.present();
+              });
+            });
+          }
+
+        }
+      ]
+    });
+    alert.present();
+  }
+  /*
   doDelete(){
     let user:any;
     this.storage.get('user').then((resp) => {
@@ -142,5 +187,5 @@ export class SettingsPage {
         toast.present();
       });
     });
-  }
+  }*/
 }
