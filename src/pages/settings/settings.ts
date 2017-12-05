@@ -74,4 +74,27 @@ export class SettingsPage {
       });
     });
   }
+  doDelete(){
+    let user:any;
+    this.storage.get('user').then((resp) => {
+      user=resp;
+      console.log(user);
+      this.user.deleteuser(user).subscribe((resp) => {
+        let toast = this.toastCtrl.create({
+          message: "Usuario borrado",
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      }, (err) => {
+        // Unable to log in
+        let toast = this.toastCtrl.create({
+          message: "Error al borrar el usuario",
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      });
+    });
+  }
 }

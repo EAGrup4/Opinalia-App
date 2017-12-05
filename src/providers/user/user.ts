@@ -84,6 +84,21 @@ export class User {
     return seq;
   }
 
+  deleteuser(user:any){
+    let userId=user._id;
+    let seq = this.api.delete(`users/delete/`+userId).share();
+
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      if (res.code == 'success') {
+        console.log("ok");
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
   /**
    * Log the user out, which forgets the session
    */

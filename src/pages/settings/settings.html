@@ -33,6 +33,6 @@
     </ion-list>
   </form>
   <div padding>
-    <button ion-button color="danger" block>{{ 'Borrar cuenta' | translate }}</button>
+    <button ion-button color="danger" (click)="doDelete()" block>{{ 'Borrar cuenta' | translate }}</button>
   </div>
 </ion-content>
