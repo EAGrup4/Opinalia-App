@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Settings, User} from '../../providers/providers';
-
+import { AlertController } from 'ionic-angular';
 /**
  * The Settings page is a simple form that syncs with a Settings provider
  * to enable the user to customize settings for the app.
@@ -45,10 +45,56 @@ export class SettingsPage {
     public formBuilder: FormBuilder,
     public navParams: NavParams,
     public translate: TranslateService,
-    private storage:Storage) {
+    private storage:Storage,
+    private alertCtrl: AlertController) {
   }
 
-  doUpdate(){
+  confirm1() {
+    let alert = this.alertCtrl.create({
+      title: 'Confirmar cambios',
+      message: '¿Estás seguro que quieres modificar tu cuenta?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('No se han guardado tus cambios');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            let user:any;
+            this.storage.get('user').then((resp) => {
+              user=resp;
+              console.log(user)
+              this.user.update(this.account,user).subscribe((resp) => {
+                let usr:any;
+                usr=resp;
+                this.storage.set('user', usr);
+                let toast = this.toastCtrl.create({
+                  message: "Usuario actualizado",
+                  duration: 3000,
+                  position: 'top'
+                });
+                toast.present();
+              }, (err) => {
+                // Unable to log in
+                let toast = this.toastCtrl.create({
+                  message: "Error al actualizar",
+                  duration: 3000,
+                  position: 'top'
+                });
+                toast.present();
+              });
+            });
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+ /* doUpdate(){
     let user:any;
     this.storage.get('user').then((resp) => {
       user=resp;
@@ -73,7 +119,7 @@ export class SettingsPage {
         toast.present();
       });
     });
-  }
+  }*/
   doDelete(){
     let user:any;
     this.storage.get('user').then((resp) => {
