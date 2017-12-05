@@ -5,11 +5,27 @@ import { Api } from '../api/api';
 
 @Injectable()
 export class Items {
+  items: Item[] = [];
 
   constructor(public api: Api) { }
 
-  query(params?: any) {
-    return this.api.get('/items', params);
+  query() {
+    let seq =this.api.get('products/all')
+    return seq;
+
+/*
+    seq.subscribe((res: any) => {
+      this.items=res;
+      if (res.status == 'success') {
+
+      } else {
+
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+  console.log("return")
+    return this.items;*/
   }
 
   add(item: Item) {

@@ -17,7 +17,7 @@ export class SearchPage {
 
   /**
    * Perform a service for the proper items.
-   */
+   *//*
   getItems(ev) {
     let val = ev.target.value;
     if (!val || !val.trim()) {

@@ -8,11 +8,46 @@
 
 
 <ion-content>
-  <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'">
-  </div>
+  <ion-card>
+  <img  src="assets/img/speakers/photo.jpg" align="middle" height="400" width="400" />
+  <ion-card-content>
+    <ion-card-title>
+    {{item.name}}
+  </ion-card-title>
+    <p>
+      {{item.company}}
+    </p>
+  </ion-card-content>
 
-  <div class="item-detail" padding>
-    <h2>{{item.name}}</h2>
-    <p>{{item.about}}</p>
-  </div>
+    <ion-item>
+      <ion-icon name='phone-portrait' item-start style="color: #d03e84"></ion-icon>
+      Categoria
+      <ion-badge item-end>{{item.category}}</ion-badge>
+    </ion-item>
+   <ion-item>
+     <ion-icon name='create' item-start style="color: #55acee"></ion-icon>
+     Puntuación media
+     <ion-badge item-end>{{item.avgRate}}</ion-badge>
+
+   </ion-item>
+
+
+  </ion-card>
+
+
+  <ion-card *ngFor="let rating of item.ratings">
+i
+    <ion-card-header>
+      {{rating.title}}
+    </ion-card-header>
+
+    <ion-card-content>
+      Comentario: {{rating.comment}}
+    </ion-card-content>
+    <ion-card-content>
+      Valoración: {{rating.rate}}
+    </ion-card-content>
+  </ion-card>
+
+
 </ion-content>

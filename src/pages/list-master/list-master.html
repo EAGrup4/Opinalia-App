@@ -1,30 +1,30 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ 'LIST_MASTER_TITLE' | translate }}</ion-title>
+    <ion-title>{{ 'Lista de productos' | translate }}</ion-title>
 
-    <ion-buttons end>
+   <!-- <ion-buttons end>
       <button ion-button icon-only (click)="addItem()">
         <ion-icon name="add"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons>-->
   </ion-navbar>
 
 </ion-header>
 
 <ion-content>
-
   <ion-list>
+
     <ion-item-sliding *ngFor="let item of currentItems">
       <button ion-item (click)="openItem(item)">
         <ion-avatar item-start>
-          <img [src]="item.profilePic" />
+          <!--<img [src]="item.profilePic"/>-->
+          <img  src="assets/img/speakers/photo.jpg" />
         </ion-avatar>
         <h2>{{item.name}}</h2>
-        <p>{{item.about}}</p>
-        <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
+        <p>{{item.company}}</p>
+        <ion-note item-end *ngIf="item.avgRate">{{item.avgRate}}</ion-note>
       </button>
-
       <ion-item-options>
         <button ion-button color="danger" (click)="deleteItem(item)">
           {{ 'DELETE_BUTTON' | translate }}

@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-import { Settings } from '../../providers/providers';
-
+import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import {Settings, User} from '../../providers/providers';
+import { AlertController } from 'ionic-angular';
+import {LoginPage} from "../login/login";
+import {LoginPageModule} from "../login/login.module";
+import {WelcomePage} from "../welcome/welcome";
 /**
  * The Settings page is a simple form that syncs with a Settings provider
  * to enable the user to customize settings for the app.
@@ -16,12 +19,16 @@ import { Settings } from '../../providers/providers';
   templateUrl: 'settings.html'
 })
 export class SettingsPage {
+  account: { email: string, password: string } = {
+    email: '',
+    password: ''
+  };
   // Our local settings object
   options: any;
 
   settingsReady = false;
 
-  form: FormGroup;
+  //form: FormGroup;
 
   profileSettings = {
     page: 'profile',
@@ -35,61 +42,159 @@ export class SettingsPage {
   subSettings: any = SettingsPage;
 
   constructor(public navCtrl: NavController,
+    public user: User,
     public settings: Settings,
+    public toastCtrl: ToastController,
     public formBuilder: FormBuilder,
     public navParams: NavParams,
-    public translate: TranslateService) {
+    public translate: TranslateService,
+    private storage:Storage,
+    private alertCtrl: AlertController) {
   }
 
-  _buildForm() {
-    let group: any = {
-      option1: [this.options.option1],
-      option2: [this.options.option2],
-      option3: [this.options.option3]
-    };
-
-    switch (this.page) {
-      case 'main':
-        break;
-      case 'profile':
-        group = {
-          option4: [this.options.option4]
-        };
-        break;
-    }
-    this.form = this.formBuilder.group(group);
-
-    // Watch the form for changes, and
-    this.form.valueChanges.subscribe((v) => {
-      this.settings.merge(this.form.value);
+  confirm1() {
+    let alert = this.alertCtrl.create({
+      title: 'Confirmar cambios',
+      message: '¿Estás seguro que quieres modificar tu cuenta?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('No se han guardado tus cambios');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            let user:any;
+            this.storage.get('user').then((resp) => {
+              user=resp;
+              console.log(user)
+              this.user.update(this.account,user).subscribe((resp) => {
+                let usr:any;
+                usr=resp;
+                this.storage.set('user', usr);
+                let toast = this.toastCtrl.create({
+                  message: "Usuario actualizado",
+                  duration: 3000,
+                  position: 'top'
+                });
+                toast.present();
+              }, (err) => {
+                // Unable to log in
+                let toast = this.toastCtrl.create({
+                  message: "Error al actualizar",
+                  duration: 3000,
+                  position: 'top'
+                });
+                toast.present();
+              });
+            });
+          }
+        }
+      ]
     });
+    alert.present();
   }
-
-  ionViewDidLoad() {
-    // Build an empty form for the template to render
-    this.form = this.formBuilder.group({});
-  }
-
-  ionViewWillEnter() {
-    // Build an empty form for the template to render
-    this.form = this.formBuilder.group({});
-
-    this.page = this.navParams.get('page') || this.page;
-    this.pageTitleKey = this.navParams.get('pageTitleKey') || this.pageTitleKey;
-
-    this.translate.get(this.pageTitleKey).subscribe((res) => {
-      this.pageTitle = res;
-    })
-
-    this.settings.load().then(() => {
-      this.settingsReady = true;
-      this.options = this.settings.allSettings;
-
-      this._buildForm();
+ /* doUpdate(){
+    let user:any;
+    this.storage.get('user').then((resp) => {
+      user=resp;
+      console.log(user)
+      this.user.update(this.account,user).subscribe((resp) => {
+        let usr:any;
+        usr=resp;
+        this.storage.set('user', usr);
+        let toast = this.toastCtrl.create({
+          message: "Usuario actualizado",
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      }, (err) => {
+        // Unable to log in
+        let toast = this.toastCtrl.create({
+          message: "Error al actualizar",
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      });
     });
+  }*/
+
+  confirm2() {
+    let alert = this.alertCtrl.create({
+      title: 'Borrar cuenta',
+      message: '¿Estás seguro que quieres borrar tu cuenta?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Tu cuenta sigue activa');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            let user:any;
+            this.storage.get('user').then((resp) => {
+              user=resp;
+              console.log(user);
+              this.user.deleteuser(user).subscribe((resp) => {
+                let toast = this.toastCtrl.create({
+                  message: "Usuario borrado",
+                  duration: 3000,
+                  position: 'top'
+                });
+                toast.present();
+                this.navCtrl.push(WelcomePage);
+
+              }, (err) => {
+                // Unable to log in
+                let toast = this.toastCtrl.create({
+                  message: "Error al borrar el usuario",
+                  duration: 3000,
+                  position: 'top'
+                });
+                toast.present();
+              });
+            });
+          }
+
+        }
+      ]
+    });
+    alert.present();
   }
 
-  ngOnChanges() {
-    console.log('Ng All Changes');
+  cerrarsesion(){
+    this.navCtrl.push(WelcomePage);
   }
+  /*
+  doDelete(){
+    let user:any;
+    this.storage.get('user').then((resp) => {
+      user=resp;
+      console.log(user);
+      this.user.deleteuser(user).subscribe((resp) => {
+        let toast = this.toastCtrl.create({
+          message: "Usuario borrado",
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      }, (err) => {
+        // Unable to log in
+        let toast = this.toastCtrl.create({
+          message: "Error al borrar el usuario",
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      });
+    });
+  }*/
 }
