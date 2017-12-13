@@ -9,7 +9,6 @@ export class Api {
   url: string = '/api';
   //url: string = 'http://147.83.7.59;
 
-
   constructor(public http: HttpClient) {
   }
 
