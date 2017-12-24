@@ -16,16 +16,18 @@
   <form (submit)="searchProduct()">
     <ion-list>
       <ion-item>
-        <ion-label fixed>Search</ion-label>
+        <ion-label fixed>Buscar</ion-label>
         <ion-input type="text" [(ngModel)]="search.parameter" name="parameter">
         </ion-input>
       </ion-item>
       <ion-item>
-        <ion-label fixed>Filter</ion-label>
+        <ion-label fixed>Filtrar</ion-label>
         <ion-select [(ngModel)]="search.filter" multiple="false" name="filter">
           <ion-option value="all">Todos</ion-option>
           <ion-option value="order">Orden Alfabetico</ion-option>
           <ion-option value="name">Nombre</ion-option>
+          <ion-option value="company">Marca</ion-option>
+          <ion-option value="category">Categoria</ion-option>
         </ion-select>
       </ion-item>
       <div padding>

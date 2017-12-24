@@ -79,6 +79,12 @@ export class ListMasterPage {
     else if(filter=="order"){
       this.order();
     }
+    else if(filter=="company"){
+      this.searchBycompany(param);
+    }
+    else if(filter=="category"){
+      this.searchBycategory(param);
+    }
   }
 
   private showAll(){
@@ -89,9 +95,16 @@ export class ListMasterPage {
     this.results=this.currentItems.filter(x=>x.name==name);
 
   }
+
+  private searchBycompany(company){
+    this.results=this.currentItems.filter(x=>x.company==company);
+  }
+  private searchBycategory(category){
+    this.results=this.currentItems.filter(x=>x.category==category);
+  }
   private order(){
     this.results=this.currentItems.sort(function(a,b){return a.name>b.name});
-}
+  }
   /**
    * Delete an item from the list of items.
    */
