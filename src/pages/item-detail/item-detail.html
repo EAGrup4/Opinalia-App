@@ -20,23 +20,22 @@
   </ion-card-content>
 
     <ion-item>
-      <ion-icon name='phone-portrait' item-start style="color: #d03e84"></ion-icon>
+      <ion-icon name='phone-portrait' item-start style="color: #515151"></ion-icon>
       Categoria
-      <ion-badge item-end>{{item.category}}</ion-badge>
+      <ion-badge item-end color="light">{{item.category}}</ion-badge>
     </ion-item>
    <ion-item>
-     <ion-icon name='create' item-start style="color: #55acee"></ion-icon>
+     <ion-icon name='create' item-start style="color: #515151"></ion-icon>
      Puntuación media
-     <ion-badge item-end>{{item.avgRate}}</ion-badge>
+     <ion-badge item-end color="light">{{item.avgRate}}</ion-badge>
 
    </ion-item>
 
 
   </ion-card>
 
-
+<ion-title>Los usuarios han comentado:</ion-title>
   <ion-card *ngFor="let rating of item.ratings">
-i
     <ion-card-header>
       {{rating.title}}
     </ion-card-header>
