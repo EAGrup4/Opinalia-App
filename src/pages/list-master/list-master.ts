@@ -4,6 +4,8 @@ import { IonicPage, ModalController, NavController } from 'ionic-angular';
 import { Item } from '../../models/item';
 import { Items } from '../../providers/providers';
 import {MainPage} from "../pages";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import 'rxjs/add/operator/map';
 
 @IonicPage()
 @Component({
@@ -11,9 +13,19 @@ import {MainPage} from "../pages";
   templateUrl: 'list-master.html'
 })
 export class ListMasterPage {
-  currentItems: Item[];
+  currentItems: any=[{}];
+  searchForm: FormGroup;
+  private results: any=[{}];
+  search: {filter: string, parameter: string}={
+    filter: '',
+    parameter:''
+  };
 
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, private fb: FormBuilder) {
+    this.searchForm = fb.group({
+      'filter':'',
+      'parameter':''
+    });
 
   }
 
@@ -29,6 +41,7 @@ export class ListMasterPage {
 
     seq.subscribe((res: any) => {
       this.currentItems=res;
+      this.results=this.currentItems;
       if (res.status == 'success') {
 
       } else {
@@ -53,6 +66,32 @@ export class ListMasterPage {
     addModal.present();
   }
 
+  private searchProduct(){
+    let filter=this.search.filter;
+    let param=this.search.parameter;
+
+    if(filter=="all")
+      this.showAll();
+
+    else if(filter=='name'){
+      this.searchByname(param);
+    }
+    else if(filter=="order"){
+      this.order();
+    }
+  }
+
+  private showAll(){
+    this.results=this.currentItems;
+  }
+
+  private searchByname(name){
+    this.results=this.currentItems.filter(x=>x.name==name);
+
+  }
+  private order(){
+    this.results=this.currentItems.sort(function(a,b){return a.name>b.name});
+}
   /**
    * Delete an item from the list of items.
    */

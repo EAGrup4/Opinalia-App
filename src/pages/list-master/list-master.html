@@ -13,9 +13,41 @@
 </ion-header>
 
 <ion-content>
+  <form (submit)="searchProduct()">
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>Search</ion-label>
+        <ion-input type="text" [(ngModel)]="search.parameter" name="parameter">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Filter</ion-label>
+        <ion-select [(ngModel)]="search.filter" multiple="false" name="filter">
+          <ion-option value="all">Todos</ion-option>
+          <ion-option value="order">Orden Alfabetico</ion-option>
+          <ion-option value="name">Nombre</ion-option>
+        </ion-select>
+      </ion-item>
+      <div padding>
+        <button ion-button color="primary" block>BUSCAR</button>
+      </div>
+
+    </ion-list>
+   <!-- <div class="form-group">
+      <label><h5>Filter</h5></label>
+      <select class="form-control"  formControlName="filter">
+        <option value="name">Name</option>
+        <option value="order">Alphabetic order</option>
+        <option value="all">All</option>
+      </select>
+      <label><h5>Word</h5></label>
+      <input type="text" class="form-control" id="name" formControlName="parameter" >
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>-->
+  </form>
   <ion-list>
 
-    <ion-item-sliding *ngFor="let item of currentItems">
+    <ion-item-sliding *ngFor="let item of results">
       <button ion-item (click)="openItem(item)">
         <ion-avatar item-start>
           <!--<img [src]="item.profilePic"/>-->
