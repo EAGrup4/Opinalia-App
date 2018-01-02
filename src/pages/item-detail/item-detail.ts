@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, NavParams } from 'ionic-angular';
 
 import { Items } from '../../providers/providers';
 
@@ -11,9 +11,18 @@ import { Items } from '../../providers/providers';
 export class ItemDetailPage {
   item: any;
 
-  constructor(public navCtrl: NavController, navParams: NavParams, items: Items) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, navParams: NavParams, items: Items) {
     this.item = navParams.get('item') //|| items.defaultItem;
     console.log(this.item.ratings)
+  }
+
+  addRating() {
+    let addModal = this.modalCtrl.create('ItemCreatePage');
+    addModal.onDidDismiss(item => {
+      if (item) {
+      }
+    })
+    addModal.present();
   }
 
 }
