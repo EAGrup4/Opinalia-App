@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
-import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angular';
+import { Items } from '../../providers/providers';
+import {Item} from "../../models/item";
 
 @IonicPage()
 @Component({
@@ -9,34 +11,20 @@ import { IonicPage, NavController, ViewController } from 'ionic-angular';
   templateUrl: 'item-create.html'
 })
 export class ItemCreatePage {
-  @ViewChild('fileInput') fileInput;
-
-  isReadyToSave: boolean;
+  item: any;
   rating: { title: string, comment: string, rate: string} = {
     title: '',
     comment: '',
     rate:''
   };
-  item: any;
 
-  form: FormGroup;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
-    this.form = formBuilder.group({
-      title:'',
-      comment: '',
-      rate:''
-    });
-
-    // Watch the form for changes, and
-    this.form.valueChanges.subscribe((v) => {
-      this.isReadyToSave = this.form.valid;
-    });
-  }
-
-  ionViewDidLoad() {
+  constructor(public navCtrl: NavController, navParams: NavParams, public viewCtrl: ViewController, public items: Items) {
+    this.item = navParams.get('item')
+    //console.log(this.item.name);
 
   }
+
   createitem(){
     console.log(this.item.name);
   }

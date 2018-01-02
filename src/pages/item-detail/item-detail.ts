@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ModalController, NavParams } from 'ionic-angular';
 
 import { Items } from '../../providers/providers';
+import {Item} from "../../models/item";
 
 @IonicPage()
 @Component({
@@ -11,18 +12,23 @@ import { Items } from '../../providers/providers';
 export class ItemDetailPage {
   item: any;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, navParams: NavParams, items: Items) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, navParams: NavParams, public items: Items) {
     this.item = navParams.get('item') //|| items.defaultItem;
-    console.log(this.item.ratings)
+    console.log(this.item.name)
   }
 
-  addRating() {
-    let addModal = this.modalCtrl.create('ItemCreatePage');
+  /*addRating(item: Item) {
+    let addModal = this.modalCtrl.create('ItemCreatePage', {item: item});
     addModal.onDidDismiss(item => {
       if (item) {
       }
     })
     addModal.present();
+  }*/
+  addRating(item: Item) {
+    this.navCtrl.push('ItemCreatePage', {
+      item: item
+    });
   }
 
 }
