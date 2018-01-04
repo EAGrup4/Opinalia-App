@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 
 
 import { Api } from '../api/api';
+import {HttpHeaders} from "@angular/common/http";
 
 /**
  * Most apps have the concept of a User. This is a simple provider
@@ -70,7 +71,11 @@ export class User {
 
   update(accountInfo:any, user:any){
     let userId=user._id;
-    let seq = this.api.post(`users/update/`+userId, accountInfo).share();
+    let token = user.token;
+    let headers = new HttpHeaders();
+    headers = headers.append("Authorization", token);
+    console.log(headers);
+    let seq = this.api.post(`users/`+userId, accountInfo, {headers:headers}).share();
 
     seq.subscribe((res: any) => {
       // If the API returned a successful response, mark the user as logged in
@@ -86,7 +91,10 @@ export class User {
 
   deleteuser(user:any){
     let userId=user._id;
-    let seq = this.api.delete(`users/delete/`+userId).share();
+    let token = user.token;
+    let headers = new HttpHeaders();
+    headers = headers.append("Authorization", token);
+    let seq = this.api.delete(`users/`+userId, {headers:headers}).share();
 
     seq.subscribe((res: any) => {
       // If the API returned a successful response, mark the user as logged in
