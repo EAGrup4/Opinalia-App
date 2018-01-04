@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Añadir valoracion</ion-title>
+    <ion-title>Añadir valoración</ion-title>
 
     <ion-buttons end>
       <button ion-button (click)="createitem()">
@@ -21,16 +21,18 @@
 
     <ion-list>
       <ion-item>
-        <ion-label fixed>Titulo</ion-label>
+        <ion-label fixed>Titulo:</ion-label>
         <ion-input type="text" [(ngModel)]="rating.title" name="title"></ion-input>
       </ion-item>
+
       <ion-item>
-        <ion-label fixed>Comentario</ion-label>
-        <ion-input type="text" [(ngModel)]="rating.comment" name="comment"></ion-input>
+        <ion-range min="1" max="10" color="secondary" pin="true" [(ngModel)]="rating.rate" name="rate">
+        <ion-label range-left>1</ion-label>
+        <ion-label range-right>10</ion-label>
+        </ion-range>
       </ion-item>
       <ion-item>
-        <ion-label fixed>Valoración</ion-label>
-        <ion-input type="text" [(ngModel)]="rating.rate" name="rate"></ion-input>
+        <ion-textarea placeholder="Escribe tu opinion acerca del producto..." rows="5" maxlength="500" [(ngModel)]="rating.comment" name="comment"></ion-textarea>
       </ion-item>
     </ion-list>
   </form>

@@ -25,9 +25,10 @@ export class ItemDetailPage {
     })
     addModal.present();
   }*/
-  addRating(item: Item) {
+  addRating() {
+    console.log(this.item.name)
     this.navCtrl.push('ItemCreatePage', {
-      item: item
+      item: this.item
     });
   }
 
