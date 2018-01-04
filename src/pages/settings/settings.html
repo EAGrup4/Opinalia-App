@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="grey">
     <ion-title>{{ 'Mi cuenta' | translate }}</ion-title>
   </ion-navbar>
 
@@ -8,8 +8,15 @@
 
 
 <ion-content>
+  <ion-item>
+    <ion-avatar align="middle">
+      <img src="assets/img/speakers/photo.jpg">
+    </ion-avatar>
+
+  </ion-item>
   <form (submit)="confirm1()">
     <ion-list>
+
 
       <ion-item>
         <ion-label fixed>{{ 'Email' | translate }}</ion-label>
