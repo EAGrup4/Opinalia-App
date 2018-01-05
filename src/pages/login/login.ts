@@ -44,7 +44,7 @@ export class LoginPage {
     }, (err) => {
       // Unable to log in
       let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
+        message: "Lo sentimos, no has podido iniciar sesión",
         duration: 3000,
         position: 'top'
       });

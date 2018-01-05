@@ -45,7 +45,7 @@ export class SignupPage {
 
         // Unable to sign up
         let toast = this.toastCtrl.create({
-          message: this.signupErrorString,
+          message: "Lo sentimos, registro inválido",
           duration: 3000,
           position: 'top'
         });
