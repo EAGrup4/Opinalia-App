@@ -42,6 +42,8 @@ export class SettingsPage {
 
   subSettings: any = SettingsPage;
 
+  private currentUser:any={};
+  private img;
   constructor(public navCtrl: NavController,
     public user: User,
     public settings: Settings,
@@ -52,7 +54,9 @@ export class SettingsPage {
     private storage:Storage,
     private app:App,
     private alertCtrl: AlertController) {
-
+    this.storage.get('user').then((resp) => {
+      this.currentUser = resp;
+    });
 
   }
 
