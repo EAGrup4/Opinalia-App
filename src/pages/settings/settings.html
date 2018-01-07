@@ -47,15 +47,17 @@
       </div>
     </ion-list>
   </form>
-  <div padding>
-    <button ion-button color="grey2" block outline (click)="confirm2()" block>Borrar cuenta</button>
-  </div>
-  <div padding>
+    <button ion-button color="grey2" round outline (click)="confirm2()">
+      <ion-item>
+        <ion-icon name="ios-warning" item-start></ion-icon>
+      </ion-item>
+      Borrar cuenta
+    </button>
+
     <button ion-button color="grey2" round outline (click)="cerrarsesion()">
       <ion-item>
         <ion-icon name="ios-exit" item-start></ion-icon>
       </ion-item>
       Cerrar sesión
     </button>
-  </div>
 </ion-content>

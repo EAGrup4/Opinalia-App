@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ToastController, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Settings, User} from '../../providers/providers';
 import { AlertController, App } from 'ionic-angular';
@@ -46,6 +46,7 @@ export class SettingsPage {
   private img;
   constructor(public navCtrl: NavController,
     public user: User,
+    public modalCtrl: ModalController,
     public settings: Settings,
     public toastCtrl: ToastController,
     public formBuilder: FormBuilder,
@@ -61,6 +62,7 @@ export class SettingsPage {
   }
 
   confirm1() {
+    
     let alert = this.alertCtrl.create({
       title: 'Confirmar cambios',
       message: '¿Estás seguro que quieres modificar tu cuenta?',
