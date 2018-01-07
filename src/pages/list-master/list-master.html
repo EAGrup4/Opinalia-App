@@ -1,27 +1,38 @@
 <ion-header>
 
   <ion-navbar color="grey">
-    <ion-title>{{ 'Lista de productos' | translate }}</ion-title>
+    <ion-title>Lista de productos</ion-title>
 
-   <!--<ion-buttons end>
-      <button ion-button icon-only (click)="addItem()">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-buttons>-->
   </ion-navbar>
 
 </ion-header>
 
 <ion-content>
-  <form (submit)="searchProduct()">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3>
+      <ion-avatar item-start>
+        <img  src="assets/img/logosmall.png" />
+      </ion-avatar>
+      </ion-col>
+      <ion-col col-9>
+        <form (submit)="searchProduct()">
     <ion-list>
+
       <ion-item>
-        <ion-label fixed>Buscar</ion-label>
+        <ion-label>
+          <ion-icon name="ios-search">
+          </ion-icon>
+          Buscar</ion-label>
         <ion-input type="text" [(ngModel)]="search.parameter" name="parameter">
         </ion-input>
       </ion-item>
+
       <ion-item>
-        <ion-label fixed>Filtrar</ion-label>
+        <ion-label>
+          <ion-icon name="ios-list">
+          </ion-icon>
+          Filtrar</ion-label>
         <ion-select [(ngModel)]="search.filter" multiple="false" name="filter">
           <ion-option value="all">Todos</ion-option>
           <ion-option value="order">Orden Alfabetico</ion-option>
@@ -31,17 +42,22 @@
         </ion-select>
       </ion-item>
       <div padding>
-        <button ion-button color="grey2" block outline block>Buscar</button>
+        <button ion-button color="grey2" block outline>Buscar</button>
       </div>
     </ion-list>
 
+
   </form>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
   <ion-list>
 
     <ion-item-sliding *ngFor="let item of results">
       <button ion-item (click)="openItem(item)">
         <ion-avatar item-start>
-          <!--<img [src]="item.profilePic"/>-->
           <img  src="assets/img/speakers/photo.jpg" />
         </ion-avatar>
         <h2>{{item.name}}</h2>
@@ -55,4 +71,7 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
