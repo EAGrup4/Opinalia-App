@@ -12,7 +12,16 @@
     <ion-avatar align="middle">
       <img src={{currentUser.profileImage}}>
     </ion-avatar>
-
+  </ion-item>
+  <ion-item>
+    <ion-icon name="ios-person" item-start></ion-icon>
+    Nombre:
+    <ion-badge color="grey2" item-end>{{currentUser.name}}</ion-badge>
+  </ion-item>
+  <ion-item>
+    <ion-icon name="ios-mail" item-start></ion-icon>
+    Correo:
+    <ion-badge color="grey2" item-end>{{currentUser.email}}</ion-badge>
   </ion-item>
   <form (submit)="confirm1()">
     <ion-list>
@@ -42,6 +51,11 @@
     <button ion-button color="grey2" block outline (click)="confirm2()" block>Borrar cuenta</button>
   </div>
   <div padding>
-    <button ion-button color="grey2" block outline (click)="cerrarsesion()" block>{{ 'Cerrar sesión' | translate }}</button>
+    <button ion-button color="grey2" round outline (click)="cerrarsesion()">
+      <ion-item>
+        <ion-icon name="ios-exit" item-start></ion-icon>
+      </ion-item>
+      Cerrar sesión
+    </button>
   </div>
 </ion-content>
