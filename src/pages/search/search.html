@@ -1,21 +1,30 @@
 <ion-header>
 
   <ion-navbar color="grey">
-    <ion-title>{{ 'SEARCH_TITLE' | translate }}</ion-title>
+    <ion-title>Rankings</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <ion-searchbar (ionInput)="query($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar>
-  <ion-list>
-    <button ion-item (click)="openItem(item)" *ngFor="let item of currentItems">
-      <ion-avatar item-start>
-        <img [src]="item.profilePic" />
-      </ion-avatar>
-      <h2>{{item.name}}</h2>
-      <p>{{item.about}}</p>
-    </button>
-  </ion-list>
+  <div padding>
+    <ion-segment [(ngModel)]="rankings" color="grey2">
+      <ion-segment-button value="desktop">
+        <ion-icon name="desktop"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="laptop">
+        <ion-icon name="laptop"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="tablet">
+        <ion-icon name="tablet-landscape"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="phone">
+        <ion-icon name="phone-portrait"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="accessories">
+        <ion-icon name="headset"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
 </ion-content>

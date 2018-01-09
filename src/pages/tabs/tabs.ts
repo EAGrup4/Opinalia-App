@@ -17,7 +17,7 @@ export class TabsPage {
   tab3Root: any = Tab3Root;
 
   tab1Title = "Inicio";
-  tab2Title = " ";
+  tab2Title = "Rankings";
   tab3Title = "Perfil";
 
   constructor(public navCtrl: NavController, public translateService: TranslateService) {
