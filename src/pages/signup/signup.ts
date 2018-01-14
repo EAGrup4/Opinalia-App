@@ -4,6 +4,7 @@ import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { User } from '../../providers/providers';
 import { MainPage } from '../pages';
+import {Storage} from "@ionic/storage";
 
 @IonicPage()
 @Component({
@@ -27,7 +28,8 @@ export class SignupPage {
   constructor(public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+    public translateService: TranslateService,
+    private storage:Storage) {
 
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
       this.signupErrorString = value;
@@ -38,7 +40,9 @@ export class SignupPage {
     if (this.account.password==this.account.password2){
     // Attempt to login in through our User service
       this.user.signup(this.account).subscribe((resp) => {
-
+        let user:any;
+        user=resp;
+        this.storage.set('user', user);
         this.navCtrl.push(MainPage);
       }, (err) => {
 
