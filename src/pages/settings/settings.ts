@@ -20,10 +20,6 @@ import {FirstRunPage} from "../pages";
 export class SettingsPage {
   rootPage=FirstRunPage;
 
-  account: { email: string, password: string } = {
-    email: '',
-    password: ''
-  };
   // Our local settings object
   options: any;
 
@@ -61,82 +57,9 @@ export class SettingsPage {
 
   }
 
-  confirm1() {
-    
+  deleteUser() {
     let alert = this.alertCtrl.create({
-      title: 'Confirmar cambios',
-      message: '¿Estás seguro que quieres modificar tu cuenta?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          handler: () => {
-            console.log('No se han guardado tus cambios');
-          }
-        },
-        {
-          text: 'Aceptar',
-          handler: () => {
-            let user:any;
-            this.storage.get('user').then((resp) => {
-              user=resp;
-              console.log(user)
-              this.user.update(this.account,user).subscribe((resp) => {
-                let usr:any;
-                usr=resp;
-                this.storage.set('user', usr);
-                let toast = this.toastCtrl.create({
-                  message: "Usuario actualizado",
-                  duration: 3000,
-                  position: 'top'
-                });
-                toast.present();
-              }, (err) => {
-                // Unable to log in
-                let toast = this.toastCtrl.create({
-                  message: "Error al actualizar",
-                  duration: 3000,
-                  position: 'top'
-                });
-                toast.present();
-              });
-            });
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
- /* doUpdate(){
-    let user:any;
-    this.storage.get('user').then((resp) => {
-      user=resp;
-      console.log(user)
-      this.user.update(this.account,user).subscribe((resp) => {
-        let usr:any;
-        usr=resp;
-        this.storage.set('user', usr);
-        let toast = this.toastCtrl.create({
-          message: "Usuario actualizado",
-          duration: 3000,
-          position: 'top'
-        });
-        toast.present();
-      }, (err) => {
-        // Unable to log in
-        let toast = this.toastCtrl.create({
-          message: "Error al actualizar",
-          duration: 3000,
-          position: 'top'
-        });
-        toast.present();
-      });
-    });
-  }*/
-
-  confirm2() {
-    let alert = this.alertCtrl.create({
-      title: 'Borrar cuenta',
+      title: 'Eliminar usuario',
       message: '¿Estás seguro que quieres borrar tu cuenta?',
       buttons: [
         {
@@ -160,6 +83,7 @@ export class SettingsPage {
                   position: 'top'
                 });
                 toast.present();
+                this.storage.clear();
                 this.app.getRootNav().setRoot(this.rootPage)
 
               }, (err) => {
@@ -180,31 +104,63 @@ export class SettingsPage {
     alert.present();
   }
 
-  cerrarsesion(){
-    this.app.getRootNav().setRoot(this.rootPage)
+  openEdit(){
+    let addModal = this.modalCtrl.create('UpdatePage');
+    addModal.onDidDismiss(update => {
+      if (update) {
+        let user:any;
+        this.storage.get('user').then((resp) => {
+          user=resp;
+          this.user.update(update,user).subscribe((resp) => {
+            let newUser:any;
+            newUser=resp;
+            this.currentUser=newUser;
+            this.storage.set('user', newUser);
+            let toast = this.toastCtrl.create({
+              message: "Usuario actualizado",
+              duration: 3000,
+              position: 'top'
+            });
+            toast.present();
+          }, (err) => {
+            // Unable to log in
+            let toast = this.toastCtrl.create({
+              message: "Error al actualizar",
+              duration: 3000,
+              position: 'top'
+            });
+            toast.present();
+          });
+        })
+      }
+    })
+    addModal.present();
   }
-  /*
-  doDelete(){
-    let user:any;
-    this.storage.get('user').then((resp) => {
-      user=resp;
-      console.log(user);
-      this.user.deleteuser(user).subscribe((resp) => {
-        let toast = this.toastCtrl.create({
-          message: "Usuario borrado",
-          duration: 3000,
-          position: 'top'
-        });
-        toast.present();
-      }, (err) => {
-        // Unable to log in
-        let toast = this.toastCtrl.create({
-          message: "Error al borrar el usuario",
-          duration: 3000,
-          position: 'top'
-        });
-        toast.present();
-      });
+
+  cerrarSesion(){
+
+    let alert = this.alertCtrl.create({
+      title: 'Cerrar sesión',
+      message: '¿Estás seguro que quieres cerrar sesión?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Tu cuenta sigue activa');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.storage.clear();
+            this.app.getRootNav().setRoot(this.rootPage);
+          }
+
+        }
+      ]
     });
-  }*/
+
+    alert.present();
+  }
 }

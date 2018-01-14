@@ -1,32 +1,53 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
-import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, ViewController, NavParams, AlertController} from 'ionic-angular';
 import { Items } from '../../providers/providers';
 import {Item} from "../../models/item";
 
 @IonicPage()
 @Component({
-  selector: 'page-item-create',
-  templateUrl: 'item-create.html'
+  selector: 'page-update',
+  templateUrl: 'update.html'
 })
-export class ItemCreatePage {
-  item: any;
-  rating: { title: string, comment: string, rate: string} = {
-    title: '',
-    comment: '',
-    rate:''
-  };
+export class UpdatePage {
+  update:FormGroup;
 
 
-  constructor(public navCtrl: NavController, navParams: NavParams, public viewCtrl: ViewController, public items: Items) {
-    this.item = navParams.get('item')
-    //console.log(this.item.name);
+  constructor(public navCtrl: NavController, navParams: NavParams, public viewCtrl: ViewController,
+              private fb:FormBuilder, private alertCtrl: AlertController,  ) {
+
+    this.update=this.fb.group({
+      email:'',
+      name:'',
+      password:''
+
+    })
 
   }
 
-  createitem(){
-    console.log(this.item.name);
+  save(update){
+    let alert = this.alertCtrl.create({
+      title: 'Editar usuario',
+      message: '¿Estás seguro que quieres guardar los cambios?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Tu cuenta sigue activa');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.viewCtrl.dismiss(this.update.value);
+          }
+
+        }
+      ]
+    });
+    alert.present();
   }
 
   /**

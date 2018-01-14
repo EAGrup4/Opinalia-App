@@ -23,41 +23,22 @@
     Correo:
     <ion-badge color="grey2" item-end>{{currentUser.email}}</ion-badge>
   </ion-item>
-  <form (submit)="confirm1()">
-    <ion-list>
 
+    <div padding>
+      <button ion-button color="grey2" block outline (click)="openEdit()">
+       Editar usuario
+      </button>
+    </div>
 
-      <ion-item>
-        <ion-label fixed>{{ 'Email' | translate }}</ion-label>
-        <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label fixed>{{ 'Nombre' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="account.name" name="name"></ion-input>
-      </ion-item>
-
-
-      <ion-item>
-        <ion-label fixed>{{ 'Contraseña' | translate }}</ion-label>
-        <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
-      </ion-item>
-
-      <div padding>
-      <button ion-button color="grey2" block outline>{{ 'Actualizar' | translate }}</button>
-      </div>
-    </ion-list>
-  </form>
-    <button ion-button color="grey2" round outline (click)="confirm2()">
-      <ion-item>
-        <ion-icon name="ios-warning" item-start></ion-icon>
-      </ion-item>
-      Borrar cuenta
-    </button>
-
-    <button ion-button color="grey2" round outline (click)="cerrarsesion()">
-      <ion-item>
-        <ion-icon name="ios-exit" item-start></ion-icon>
-      </ion-item>
+  <div padding>
+    <button ion-button color="grey2" block outline (click)="cerrarSesion()">
       Cerrar sesión
     </button>
+  </div>
+
+  <div padding class="delete-user">
+    <button ion-button color="grey2" block outline (click)="deleteUser()">
+      Eliminar cuenta
+    </button>
+  </div>
 </ion-content>
