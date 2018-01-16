@@ -15,7 +15,13 @@
 <ion-content>
   <ion-card >
     <ion-item color="light">
-      <img  src="assets/img/speakers/photo.jpg" align="middle" height="400" width="400" />
+      <!--<img  src="assets/img/speakers/photo.jpg" align="middle" height="400" width="400" />-->
+      <ion-slides pager zoom *ngIf="item.images?.length>0">
+        <ion-slide *ngFor="let image of item.images" height="400" width="400">
+          <img src={{image.src}} align="middle" height="400" width="400">
+        </ion-slide>
+      </ion-slides>
+      <img  *ngIf="item.images?.length==0" src="assets/img/speakers/photo.jpg" align="middle" height="400" width="400" />
     </ion-item>
 
   <ion-card-content>

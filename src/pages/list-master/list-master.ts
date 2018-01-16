@@ -17,13 +17,13 @@ export class ListMasterPage {
   searchForm: FormGroup;
   private results: any=[{}];
   search: {filter: string, parameter: string}={
-    filter: '',
+    filter: 'all',
     parameter:''
   };
 
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, private fb: FormBuilder) {
     this.searchForm = fb.group({
-      'filter':'',
+      'filter':'all',
       'parameter':''
     });
 
@@ -50,6 +50,8 @@ export class ListMasterPage {
     }, err => {
       console.error('ERROR', err);
     });
+
+
   }
 
   /**

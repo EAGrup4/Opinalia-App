@@ -26,19 +26,28 @@
 
     <div padding>
       <button ion-button color="grey2" block outline (click)="openEdit()">
-       Editar usuario
+        <div>
+          <ion-icon name="md-create"></ion-icon>
+          <label>Editar usuario</label>
+        </div>
       </button>
     </div>
 
   <div padding>
     <button ion-button color="grey2" block outline (click)="cerrarSesion()">
-      Cerrar sesión
+      <div>
+        <ion-icon name="md-log-out"></ion-icon>
+        <label>Cerrar sesión</label>
+      </div>
     </button>
   </div>
 
   <div padding class="delete-user">
     <button ion-button color="grey2" block outline (click)="deleteUser()">
-      Eliminar cuenta
+      <div>
+        <ion-icon name="warning"></ion-icon>
+        <label>Eliminar cuenta</label>
+      </div>
     </button>
   </div>
 </ion-content>
