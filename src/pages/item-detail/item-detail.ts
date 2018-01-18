@@ -27,7 +27,7 @@ export class ItemDetailPage {
   }*/
   addRating() {
     console.log(this.item.name)
-    this.navCtrl.push('ItemCreatePage', {
+    this.navCtrl.push('ContactPage', {
       item: this.item
     });
   }

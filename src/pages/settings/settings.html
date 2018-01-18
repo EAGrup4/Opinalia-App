@@ -42,8 +42,14 @@
     </button>
   </div>
 
-  <div padding class="delete-user">
-    <button ion-button color="grey2" block outline (click)="deleteUser()">
+  <div padding class="bottom">
+    <button ion-button color="grey2" block outline (click)="openContact()">
+      <div>
+        <ion-icon name="paper-plane"></ion-icon>
+        <label>Contaco</label>
+      </div>
+    </button>
+    <button class="delete" ion-button color="grey2" block outline (click)="deleteUser()">
       <div>
         <ion-icon name="warning"></ion-icon>
         <label>Eliminar cuenta</label>
