@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 
 import { User } from '../../providers/providers';
 import { MainPage } from '../pages';
+import { ForgotPasswordPage } from '../pages'
 
 @IonicPage()
 @Component({
@@ -50,5 +51,9 @@ export class LoginPage {
       });
       toast.present();
     });
+  }
+  
+  forgotPass(){
+     this.navCtrl.push(ForgotPasswordPage);
   }
 }

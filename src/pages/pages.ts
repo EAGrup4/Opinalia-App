@@ -5,6 +5,9 @@ export const FirstRunPage = 'WelcomePage';
 // Change this if not using tabs
 export const MainPage = 'TabsPage';
 
+//Forgot password page
+export const ForgotPasswordPage='ForgotPasswordPage'
+
 // The initial root pages for our tabs (remove if not using tabs)
 export const Tab1Root = 'ListMasterPage';
 export const Tab2Root = 'SearchPage';
