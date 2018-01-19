@@ -26,7 +26,7 @@ export class ForgotPasswordPage {
 
   send(email){
     this.user.password(email).subscribe((resp) => {
-      onsole.log(resp)
+      console.log(resp)
         let toast = this.toastCtrl.create({
         message: "Enlace enviado. POr favor, revisa tu correo.",
         duration: 3000,
