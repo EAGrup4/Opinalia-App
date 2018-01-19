@@ -11,11 +11,14 @@ import { Items } from '../../providers/providers';
 })
 export class SearchPage {
 
-  currentItems: any = [];
+
   rankings: any = [];
+   allbest: any=[{}];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items) {
     this.rankings="all"
+    this.charge();
+
   }
 
   /**
@@ -35,6 +38,21 @@ export class SearchPage {
   /**
    * Navigate to the detail page for this item.
    */
+  charge(){
+    let seq=this.items.query();
+
+    seq.subscribe((res: any) => {
+      this.allbest=res;
+      console.log(this.allbest)
+      if (res.status == 'success') {
+
+      } else {
+
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+  }
   openItem(item: Item) {
     this.navCtrl.push('ItemDetailPage', {
       item: item

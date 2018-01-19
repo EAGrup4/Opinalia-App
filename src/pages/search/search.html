@@ -30,11 +30,20 @@
       </ion-segment-button>
     </ion-segment>
   </div>
+
   <div [ngSwitch]="rankings" >
-    <ion-list *ngSwitchCase="'desktop'">
-      <a ion-item>
-        <ion-label>desktop list</ion-label>
-      </a>
+    <ion-list *ngSwitchCase="'all'">
+      <ion-item-sliding *ngFor="let item of allbest">
+      <button ion-item (click)="openItem(item)">
+        <ion-avatar item-start>
+          <img *ngIf="item.images?.length>0" src={{item.images[0].src}}>
+          <img *ngIf="item.images?.length==0"   src='assets/img/speakers/photo.jpg'>
+        </ion-avatar>
+        <h2>{{item.name}}</h2>
+        <p>{{item.company}}</p>
+        <ion-note item-end >{{item.avgRate}}</ion-note>
+         </button>
+      </ion-item-sliding>
     </ion-list>
     <ion-list *ngSwitchCase="'laptop'">
       <a ion-item>
