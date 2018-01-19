@@ -10,6 +10,9 @@
 <ion-content>
   <div padding>
     <ion-segment [(ngModel)]="rankings" color="light">
+      <ion-segment-button value="all">
+        <ion-icon name="trophy"></ion-icon>
+      </ion-segment-button>
       <ion-segment-button value="desktop">
         <ion-icon name="desktop"></ion-icon>
       </ion-segment-button>
@@ -26,5 +29,17 @@
         <ion-icon name="headset"></ion-icon>
       </ion-segment-button>
     </ion-segment>
+  </div>
+  <div [ngSwitch]="rankings" >
+    <ion-list *ngSwitchCase="'desktop'">
+      <a ion-item>
+        <ion-label>desktop list</ion-label>
+      </a>
+    </ion-list>
+    <ion-list *ngSwitchCase="'laptop'">
+      <a ion-item>
+        <ion-label> list</ion-label>
+      </a>
+    </ion-list>
   </div>
 </ion-content>
