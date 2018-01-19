@@ -1,9 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
-import {IonicPage, NavController, ViewController, NavParams, AlertController} from 'ionic-angular';
-import { Items } from '../../providers/providers';
-import {Item} from "../../models/item";
+import {IonicPage, NavController, ViewController, NavParams, AlertController,ToastController} from 'ionic-angular';
+import { User } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -11,23 +10,38 @@ import {Item} from "../../models/item";
   templateUrl: 'forgot-password.html'
 })
 export class ForgotPasswordPage {
-  update:FormGroup;
+  email:FormGroup;
 
 
   constructor(public navCtrl: NavController, navParams: NavParams, public viewCtrl: ViewController,
-              private fb:FormBuilder, private alertCtrl: AlertController,  ) {
+              private fb:FormBuilder, private alertCtrl: AlertController, public user: User,
+              public toastCtrl: ToastController) {
 
-    this.update=this.fb.group({
-      email:'',
-      name:'',
-      password:''
+    this.email=this.fb.group({
+      email:''
 
     })
 
   }
 
-  save(update){
-    
+  send(email){
+    this.user.password(email).subscribe((resp) => {
+      onsole.log(resp)
+        let toast = this.toastCtrl.create({
+        message: "Enlace enviado. POr favor, revisa tu correo.",
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    }, (err) => {
+      // Unable to log in
+      let toast = this.toastCtrl.create({
+        message: "Error al enviar el mensaje",
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    });
   }
 
   /**

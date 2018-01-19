@@ -107,6 +107,22 @@ export class User {
 
     return seq;
   }
+  
+  password(email:any){
+    let seq = this.api.post(`users/auth/forgotPassword`, email).share();
+
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      if (res.code == 'success') {
+        console.log("ok");
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+   
+   return seq;
+  }
+  
   /**
    * Log the user out, which forgets the session
    */
