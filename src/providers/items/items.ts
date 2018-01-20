@@ -13,6 +13,10 @@ export class Items {
     let seq =this.api.get('products/all')
     return seq;
   }
+  itemdetail(itemid: any) {
+    let seq =this.api.get(`products/id/`+itemid)
+    return seq;
+  }
   allbest(){
     let seq =this.api.get('products/best7')
     return seq;
