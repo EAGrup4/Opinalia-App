@@ -26,7 +26,8 @@ export class ItemCreatePage {
   }
 
   createitem(){
-    console.log(this.item.name);
+    let idproduct=this.item._id;
+    let seq=this.items.addrating(this.rating, idproduct);
   }
 
   /**

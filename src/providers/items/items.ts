@@ -13,6 +13,10 @@ export class Items {
     let seq =this.api.get('products/all')
     return seq;
   }
+  addrating(idproduct: any, rating: any){
+
+
+  }
   itemdetail(itemid: any) {
     let seq =this.api.get(`products/id/`+itemid)
     return seq;
