@@ -48,18 +48,46 @@
 
   </ion-card>
 
-<ion-title>Los usuarios han comentado:</ion-title>
-  <ion-card *ngFor="let rating of item.ratings">
-    <ion-card-header>
-      {{rating.title}}
-    </ion-card-header>
+  <ion-card color="light" *ngFor="let rating of item.ratings">
 
-    <ion-card-content>
-      Comentario: {{rating.comment}}
+    <ion-item color="light">
+      <ion-avatar item-start>
+        {{rating.userId?.profileImage}}
+      </ion-avatar>
+      <h2>{{rating.title}}</h2>
+      <p>{{rating.userId?.name}}</p>
+    </ion-item>
+
+    <ion-card-content >
+      <p>{{rating.comment}}</p>
     </ion-card-content>
-    <ion-card-content>
-      Valoración: {{rating.rate}}
-    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>{{rating.numLike}}</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="thumbs-down"></ion-icon>
+          <div>{{rating.numDislike}}</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="megaphone"></ion-icon>
+          <div>{{rating.numReport}}</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          {{rating.date| date:'longDate'}}
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
   </ion-card>
 
 
