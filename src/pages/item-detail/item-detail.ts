@@ -34,6 +34,15 @@ export class ItemDetailPage {
       console.error('ERROR', err);
     });
   }
+  report(){
+    let addModal = this.modalCtrl.create('ReportRatingPage');
+    addModal.onDidDismiss(newreport=>{
+      if(newreport){
+        console.log('aaa')
+      }
+    })
+    addModal.present();
+  }
   addRating() {
     let addModal = this.modalCtrl.create('ItemCreatePage');
     addModal.onDidDismiss(newrating=>{
