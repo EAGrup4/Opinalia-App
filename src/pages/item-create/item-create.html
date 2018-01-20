@@ -3,10 +3,10 @@
   <ion-navbar color="grey">
     <ion-title>Añadir valoración</ion-title>
 
-    <ion-buttons end>
-      <button ion-button (click)="createitem()">
+    <ion-buttons (click)="cancel()" start>
+      <button ion-button >
         <span color="primary" showWhen="ios">
-          Añadir
+          Cancelar
         </span>
         <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
       </button>
@@ -34,6 +34,10 @@
       <ion-item>
         <ion-textarea placeholder="Escribe tu opinion acerca del producto..." rows="5" maxlength="500" [(ngModel)]="rating.comment" name="comment"></ion-textarea>
       </ion-item>
+
+      <div padding>
+        <button ion-button type="submit" color="grey2" block outline>Añadir</button>
+      </div>
     </ion-list>
   </form>
 </ion-content>

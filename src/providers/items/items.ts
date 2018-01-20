@@ -2,19 +2,36 @@ import { Injectable } from '@angular/core';
 
 import { Item } from '../../models/item';
 import { Api } from '../api/api';
+import {HttpHeaders} from "@angular/common/http";
 
 @Injectable()
 export class Items {
   items: Item[] = [];
 
-  constructor(public api: Api) { }
+  constructor(public api: Api) {
+
+  }
 
   query() {
     let seq =this.api.get('products/all')
     return seq;
   }
-  addrating(idproduct: any, rating: any){
-
+  addrating(idproduct, rating: any, token: any){
+    let body=rating;
+    let headers = new HttpHeaders();
+    headers = headers.append("Authorization", token);
+    console.log("id2",idproduct);
+    console.log(body);
+    let seq = this.api.post(`products/rating/`+idproduct, body, {headers:headers}).share();
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      if (res.status == 'success') {
+        console.log("ok");
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+    return seq;
 
   }
   itemdetail(itemid: any) {

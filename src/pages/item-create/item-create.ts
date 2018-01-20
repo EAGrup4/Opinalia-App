@@ -1,10 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
-import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, ViewController, NavParams, ToastController, AlertController} from 'ionic-angular';
 import { Items } from '../../providers/providers';
-import {Item} from "../../models/item";
-
 @IonicPage()
 @Component({
   selector: 'page-item-create',
@@ -12,6 +10,7 @@ import {Item} from "../../models/item";
 })
 export class ItemCreatePage {
   item: any;
+  token: any;
   rating: { title: string, comment: string, rate: string} = {
     title: '',
     comment: '',
@@ -19,15 +18,38 @@ export class ItemCreatePage {
   };
 
 
-  constructor(public navCtrl: NavController, navParams: NavParams, public viewCtrl: ViewController, public items: Items) {
-    this.item = navParams.get('item')
-    //console.log(this.item.name);
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public viewCtrl: ViewController,
+              private alertCtrl: AlertController,
+              public toastCtrl: ToastController,
+              public items: Items) {
 
   }
 
   createitem(){
-    let idproduct=this.item._id;
-    let seq=this.items.addrating(this.rating, idproduct);
+    let alert = this.alertCtrl.create({
+      title: 'Añadir valoracion',
+      message: '¿Estás seguro que quieres añadir esta valoración?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Has cancelado la valoracion');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            console.log(this.rating)
+            this.viewCtrl.dismiss(this.rating);
+          }
+
+        }
+      ]
+    });
+    alert.present();
   }
 
   /**
