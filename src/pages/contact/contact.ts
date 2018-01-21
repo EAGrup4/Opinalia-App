@@ -31,7 +31,7 @@ export class ContactPage {
     this.storage.get('user').then((resp) => {
         this.u=resp;
 
-        if(this.user){
+        if(this.u){
           this.contact=this.fb.group({
             email:this.u.email,
             name:this.u.name,

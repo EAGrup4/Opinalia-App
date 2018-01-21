@@ -67,17 +67,27 @@
 
     <ion-row>
       <ion-col>
-        <button ion-button (click)="like(rating)" color="dark" icon-left clear small>
+        <button ion-button (click)="like(rating)" *ngIf="!rating.liked" color="dark" icon-left clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>{{rating.numLike}}</div>
+        </button>
+        <button ion-button *ngIf="rating.liked" color="secondary" icon-left clear small>
           <ion-icon name="thumbs-up"></ion-icon>
           <div>{{rating.numLike}}</div>
         </button>
       </ion-col>
+
       <ion-col>
-        <button ion-button (click)="dislike(rating)" color="dark" icon-left clear small>
+        <button ion-button *ngIf="!rating.disliked" (click)="dislike(rating)" color="dark" icon-left clear small>
+          <ion-icon name="thumbs-down"></ion-icon>
+          <div>{{rating.numDislike}}</div>
+        </button>
+        <button ion-button *ngIf="rating.disliked" color="danger" icon-left clear small>
           <ion-icon name="thumbs-down"></ion-icon>
           <div>{{rating.numDislike}}</div>
         </button>
       </ion-col>
+
       <ion-col>
         <button ion-button (click)="report(rating)" color="dark" icon-left clear small>
           <ion-icon name="megaphone"></ion-icon>
