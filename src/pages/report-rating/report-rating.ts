@@ -26,7 +26,29 @@ export class ReportRatingPage {
 
   }
 
-  reportcomment(){
+  addreport(){
+    let alert = this.alertCtrl.create({
+      title: 'Reportar comentario',
+      message: '¿Estás seguro de reportar este comentario?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Has cancelado el reporte');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            console.log(this.report)
+            this.viewCtrl.dismiss(this.report);
+          }
+
+        }
+      ]
+    })
+    alert.present();
 
   }
 

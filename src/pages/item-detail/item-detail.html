@@ -67,21 +67,21 @@
 
     <ion-row>
       <ion-col>
-        <button ion-button color="dark" icon-left clear small>
+        <button ion-button (click)="like(rating)" color="dark" icon-left clear small>
           <ion-icon name="thumbs-up"></ion-icon>
           <div>{{rating.numLike}}</div>
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button color="dark" icon-left clear small>
+        <button ion-button (click)="dislike(rating)" color="dark" icon-left clear small>
           <ion-icon name="thumbs-down"></ion-icon>
           <div>{{rating.numDislike}}</div>
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button (click)="report()" color="dark" icon-left clear small>
+        <button ion-button (click)="report(rating)" color="dark" icon-left clear small>
           <ion-icon name="megaphone"></ion-icon>
-          <div>{{rating.numReport}}</div>
+          <div>Reportar</div>
         </button>
       </ion-col>
       <ion-col center text-center>
