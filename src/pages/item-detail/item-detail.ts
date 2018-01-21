@@ -34,11 +34,28 @@ export class ItemDetailPage {
       console.error('ERROR', err);
     });
   }
-  report(){
+  report(rating){
     let addModal = this.modalCtrl.create('ReportRatingPage');
     addModal.onDidDismiss(newreport=>{
       if(newreport){
-        console.log('aaa')
+        let user: any;
+        this.storage.get('user').then((resp)=>{
+          user=resp;
+          let token: any={};
+          token=user.token;
+          let idproduct=this.item._id;
+          let idrating=rating._id;
+          this.items.addreport(idproduct, idrating, newreport, token).subscribe((resp)=>{
+          }, (err)=>{
+            let toast = this.toastCtrl.create({
+              message: "Ya has reportado este comentario",
+              duration: 3000,
+              position: 'top'
+            });
+            toast.present();
+          })
+        })
+
       }
     })
     addModal.present();
@@ -50,7 +67,7 @@ export class ItemDetailPage {
         let user:any;
         this.storage.get('user').then((resp) => {
           user=resp;
-          let token: any={}
+          let token: any={};
           token=user.token;
           let idproduct=this.item._id;
           this.items.addrating(idproduct, newrating, token).subscribe((resp)=>{
