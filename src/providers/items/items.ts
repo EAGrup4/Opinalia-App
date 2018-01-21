@@ -47,6 +47,40 @@ export class Items {
     return seq;
 
   }
+
+  dislikeButton(idproduct, idrating, token: any) {
+    let headers= new HttpHeaders();
+    headers = headers.append("Authorization", token);
+    let seq = this.api.post(`products/rating/dislike/`+ idproduct + `/` +idrating, null,{headers:headers}).share();
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      if (res.status == 'success') {
+        console.log("ok");
+      }
+    }, (err) => {
+      console.error('ERROR', err);
+    });
+    return seq;
+
+
+  }
+  likeButton(idproduct, idrating, token: any) {
+    let headers= new HttpHeaders();
+    headers = headers.append("Authorization", token);
+    let seq = this.api.post(`products/rating/like/`+ idproduct + `/` +idrating, null,{headers:headers}).share();
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      if (res.status == 'success') {
+        console.log("ok");
+      }
+    }, (err) => {
+      console.error('ERROR', err);
+    });
+    return seq;
+
+
+  }
+
   itemdetail(itemid: any) {
     let seq =this.api.get(`products/id/`+itemid)
     return seq;

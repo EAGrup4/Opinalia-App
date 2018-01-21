@@ -34,6 +34,49 @@ export class ItemDetailPage {
       console.error('ERROR', err);
     });
   }
+  like(rating){
+
+    this.storage.get('user').then((resp)=> {
+      let user: any;
+      user = resp;
+      let token: any = {};
+      token = user.token;
+      let idproduct = this.item._id;
+      let idrating = rating._id;
+      this.items.likeButton(idproduct, idrating, token).subscribe((resp) => {
+      }, (err) => {
+        let toast = this.toastCtrl.create({
+          message: "Ya has dado me gusta al comentario",
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      })
+    })
+  }
+  dislike(rating){
+
+    this.storage.get('user').then((resp)=> {
+      let user: any;
+      user = resp;
+      let token: any = {};
+      token = user.token;
+      let idproduct = this.item._id;
+      let idrating = rating._id;
+      this.items.dislikeButton(idproduct, idrating, token).subscribe((resp) => {
+      }, (err) => {
+        let toast = this.toastCtrl.create({
+          message: "Ya has dado me gusta al comentario",
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      })
+    })
+  }
+
+
+
   report(rating){
     let addModal = this.modalCtrl.create('ReportRatingPage');
     addModal.onDidDismiss(newreport=>{
