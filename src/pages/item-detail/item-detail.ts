@@ -66,11 +66,9 @@ export class ItemDetailPage {
           })
 
         })
-
       }
     })
     addModal.present();
-
   }
 
 }

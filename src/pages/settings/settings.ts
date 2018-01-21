@@ -163,4 +163,14 @@ export class SettingsPage {
 
     alert.present();
   }
+
+  openContact(){
+    let addModal = this.modalCtrl.create('ContactPage');
+    addModal.onDidDismiss(message => {
+      if (message) {
+        console.log("Ok")
+      }
+    })
+    addModal.present();
+  }
 }
