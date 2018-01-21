@@ -44,15 +44,25 @@ export class LoginPage {
       this.navCtrl.push(MainPage);
     }, (err) => {
       // Unable to log in
-      let toast = this.toastCtrl.create({
-        message: "Lo sentimos, no has podido iniciar sesión",
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
+      if(err.status==404) {
+        let toast = this.toastCtrl.create({
+          message: "Usuario no existente",
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      }else {
+        // Unable to sign up
+        let toast = this.toastCtrl.create({
+          message: "Lo sentimos, no se ha podido iniciar sesión",
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      }
     });
   }
-  
+
   forgotPass(){
      this.navCtrl.push(ForgotPasswordPage);
   }

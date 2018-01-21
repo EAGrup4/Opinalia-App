@@ -24,6 +24,7 @@ export class ItemDetailPage {
     let seq=this.items.itemdetail(this.item._id);
     seq.subscribe((res: any) => {
       this.currentItem=res;
+      this.checkLiked();
       console.log(this.currentItem)
       if (res.status == 'success') {
 
@@ -44,13 +45,17 @@ export class ItemDetailPage {
       let idproduct = this.item._id;
       let idrating = rating._id;
       this.items.likeButton(idproduct, idrating, token).subscribe((resp) => {
+        this.currentItem=resp;
+        this.checkLiked();
       }, (err) => {
-        let toast = this.toastCtrl.create({
-          message: "Ya has dado me gusta al comentario",
-          duration: 3000,
-          position: 'top'
-        });
-        toast.present();
+        if(err.status==409) {
+          let toast = this.toastCtrl.create({
+            message: "Ya has dado me gusta al comentario",
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present();
+        }
       })
     })
   }
@@ -64,18 +69,20 @@ export class ItemDetailPage {
       let idproduct = this.item._id;
       let idrating = rating._id;
       this.items.dislikeButton(idproduct, idrating, token).subscribe((resp) => {
+        this.currentItem=resp;
+        this.checkLiked();
       }, (err) => {
-        let toast = this.toastCtrl.create({
-          message: "Ya has dado me gusta al comentario",
-          duration: 3000,
-          position: 'top'
-        });
-        toast.present();
+        if(err.status==409) {
+          let toast = this.toastCtrl.create({
+            message: "Ya has dado me gusta al comentario",
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present();
+        }
       })
     })
   }
-
-
 
   report(rating){
     let addModal = this.modalCtrl.create('ReportRatingPage');
@@ -90,12 +97,14 @@ export class ItemDetailPage {
           let idrating=rating._id;
           this.items.addreport(idproduct, idrating, newreport, token).subscribe((resp)=>{
           }, (err)=>{
-            let toast = this.toastCtrl.create({
-              message: "Ya has reportado este comentario",
-              duration: 3000,
-              position: 'top'
-            });
-            toast.present();
+            if(err.status==409) {
+              let toast = this.toastCtrl.create({
+                message: "Ya has reportado este comentario",
+                duration: 3000,
+                position: 'top'
+              });
+              toast.present();
+            }
           })
         })
 
@@ -115,6 +124,7 @@ export class ItemDetailPage {
           let idproduct=this.item._id;
           this.items.addrating(idproduct, newrating, token).subscribe((resp)=>{
             this.currentItem=resp;
+            this.checkLiked();
 
           }, (err)=>{
             let toast = this.toastCtrl.create({
@@ -128,6 +138,37 @@ export class ItemDetailPage {
       }
     })
     addModal.present();
+  }
+
+  public checkLiked() {
+    this.storage.get('user').then((resp) => {
+      let user;
+      user=resp;
+      let id = user._id;
+
+      for (let rate  of this.currentItem.ratings) {
+        let likes: any = [{}];
+        likes = rate.likes;
+        let dislikes: any = [{}];
+        dislikes = rate.dislikes;
+
+        for (let i = 0; i < likes.length; i++) {
+          if (likes[i].userId === id) {
+            rate.liked = true;
+            i = likes.length;
+          }
+        }
+
+        if(!rate.liked) {
+          for (let i = 0; i < dislikes.length; i++) {
+            if (dislikes[i].userId === id) {
+              rate.disliked = true;
+              i = dislikes.length;
+            }
+          }
+        }
+      }
+    });
   }
 
 }
