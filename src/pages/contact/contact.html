@@ -8,7 +8,7 @@
         <span color="primary" showWhen="ios">
           Cancelar
         </span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+        <ion-icon name="md-close" showWhen="android,windows,core"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -19,14 +19,14 @@
 <ion-content>
   <form [formGroup]="contact" (submit)="send(contact.value)">
     <ion-list>
-      <ion-item *ngIf="!user">
+      <ion-item >
         <ion-label fixed>{{ 'Email' | translate }}</ion-label>
-        <ion-input type="email"  name="email" formControlName="email"></ion-input>
+        <ion-input type="email"  name="email" formControlName="email" placeholder="{{u?.email}}"></ion-input>
       </ion-item>
 
-      <ion-item *ngIf="!user">
+      <ion-item >
         <ion-label fixed>{{ 'Nombre' | translate }}</ion-label>
-        <ion-input type="text"  name="name" formControlName="name"></ion-input>
+        <ion-input type="text"  name="name" formControlName="name" placeholder="{{u?.name}}"></ion-input>
       </ion-item>
 
 
