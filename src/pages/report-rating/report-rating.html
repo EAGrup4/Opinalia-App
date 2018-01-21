@@ -17,5 +17,30 @@
 
 
 <ion-content>
+<form (submit)="addreport()">
+  <ion-list>
 
+    <ion-item>
+      <ion-label>
+        <ion-icon name="megaphone">
+        </ion-icon>
+        Motivo:</ion-label>
+      <ion-select placeholder="Selecciona" [(ngModel)]="report.reason" multiple="false" name="reason" >
+        <ion-option>Contenido sexual</ion-option>
+        <ion-option>Contenido inadecuado</ion-option>
+        <ion-option>Contenido violento o que incita al odio</ion-option>
+        <ion-option>Contenido engañoso o con spam</ion-option>
+        <ion-option>Contenido para trolear</ion-option>
+        <ion-option>Contenido repetitivo o flood</ion-option>
+        <ion-option>Otros</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-textarea placeholder="Escribe un comentario acerca de tu reporte..." rows="5" maxlength="500" [(ngModel)]="report.comment" name="comment"></ion-textarea>
+    </ion-item>
+    <div padding>
+      <button ion-button type="submit" color="grey2" block outline>Reportar</button>
+    </div>
+  </ion-list>
+</form>
 </ion-content>

@@ -10,6 +10,10 @@ import { Items } from '../../providers/providers';
 })
 export class ReportRatingPage {
   item: any;
+  report: {reason: string, comment: string}={
+    reason: '',
+    comment: ''
+};
 
 
 
