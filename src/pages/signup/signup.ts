@@ -37,8 +37,8 @@ export class SignupPage {
   }
 
   doSignup() {
-    if (this.account.password==this.account.password2){
-    // Attempt to login in through our User service
+    if (this.account.password==this.account.password2 && this.account.name.length>=4 && this.account.name.length<20){
+
       this.user.signup(this.account).subscribe((resp) => {
         let user:any;
         user=resp;
@@ -56,7 +56,7 @@ export class SignupPage {
         toast.present();
       });
     }
-    else{
+    if (this.account.password!=this.account.password2 && this.account.name.length>=4 && this.account.name.length<20){
       let toast = this.toastCtrl.create({
         message: "Las contraseñas no coinciden",
         duration: 3000,
@@ -64,6 +64,39 @@ export class SignupPage {
       });
       toast.present();
     }
+    if (this.account.password==this.account.password2 && this.account.name.length<4){
+      let toast = this.toastCtrl.create({
+        message: "El campo nombre debe tener entre 4 y 20 caracteres",
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    }
+    if (this.account.password==this.account.password2 && this.account.name.length>20){
+      let toast = this.toastCtrl.create({
+        message: "El campo nombre debe tener entre 4 y 20 caracteres",
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    }
+    if (this.account.password!=this.account.password2 && this.account.name.length>20){
+      let toast = this.toastCtrl.create({
+        message: "Has introducido un nombre demasiado largo y las contraseñas no coinciden",
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    }
+    if (this.account.password!=this.account.password2 && this.account.name.length<4){
+      let toast = this.toastCtrl.create({
+        message: "Has introducido un nombre demasiado corto y las contraseñas no coinciden",
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    }
+
 
   }
 }
