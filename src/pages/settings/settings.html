@@ -43,17 +43,15 @@
   </div>
 
   <div padding class="bottom">
-    <button ion-button color="grey2" block outline (click)="openContact()">
-      <div>
-        <ion-icon name="paper-plane"></ion-icon>
-        <label>Contaco</label>
-      </div>
-    </button>
     <button class="delete" ion-button color="grey2" block outline (click)="deleteUser()">
       <div>
         <ion-icon name="warning"></ion-icon>
         <label>Eliminar cuenta</label>
       </div>
     </button>
+    <div class="contact">
+      <!-- <button ion-button color="grey2" block outline (click)="openContact()">Contacto</button>-->
+      <ion-label (click)="openContact()">Contacta con nosotros</ion-label>
+    </div>
   </div>
 </ion-content>

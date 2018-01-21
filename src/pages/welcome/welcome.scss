@@ -43,4 +43,28 @@ page-welcome {
       background-color: rgb(220, 220, 220);
     }
   }
+
+  div ion-icon{
+    padding-right: 8px;
+  }
+
+  .contact ion-label{
+    margin: 0 auto;
+    background:transparent;
+    color:#A0A0A0;
+    text-decoration: underline;
+    text-align: center;
+    font-size: 15px;
+  }
+
+  .contact{
+    position:absolute;
+    bottom: 10px;
+    width: 100%;
+  }
+
+  .facebook-button{
+    background-color: #3b5998 !important;
+    color:white !important;
+  }
 }

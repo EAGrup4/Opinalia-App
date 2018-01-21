@@ -124,7 +124,6 @@ export class ItemDetailPage {
             });
             toast.present();
           })
-
         })
       }
     })
