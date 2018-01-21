@@ -89,6 +89,21 @@ export class User {
     return seq;
   }
 
+  contact(body:any){
+    let seq = this.api.post(`users/contact`, body).share();
+
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      if (res.code == 'success') {
+        console.log("ok");
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
   deleteuser(user:any){
     let userId=user._id;
     let token = user.token;

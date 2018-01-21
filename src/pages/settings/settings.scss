@@ -8,15 +8,16 @@ page-settings {
     border: 1px solid white;
   }
 
-  .delete-user{
+  .bottom{
     position:absolute;
     bottom: 0;
     width:100%;
   }
 
-  .delete-user button{
+  .bottom .delete{
     color:red;
     border:1px solid red;
+    margin-top:15px;
   }
 
   div ion-icon{
