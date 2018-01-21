@@ -12,9 +12,8 @@ import {Storage} from "@ionic/storage";
   templateUrl: 'signup.html'
 })
 export class SignupPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
+
+
   account: { name: string, email: string, password: string, password2: string } = {
     name: '',
     email: '',
@@ -45,15 +44,22 @@ export class SignupPage {
         this.storage.set('user', user);
         this.navCtrl.push(MainPage);
       }, (err) => {
-
-
-        // Unable to sign up
-        let toast = this.toastCtrl.create({
-          message: "Lo sentimos, registro inválido",
-          duration: 3000,
-          position: 'top'
-        });
-        toast.present();
+        if(err.status==409) {
+          let toast = this.toastCtrl.create({
+            message: "Ya existe un usuario con ese nombre",
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present();
+        }else {
+          // Unable to sign up
+          let toast = this.toastCtrl.create({
+            message: "Lo sentimos, registro inválido",
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present();
+        }
       });
     }
     if (this.account.password!=this.account.password2 && this.account.name.length>=4 && this.account.name.length<20){

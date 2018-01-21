@@ -14,7 +14,7 @@ export class ItemCreatePage {
   rating: { title: string, comment: string, rate: string} = {
     title: '',
     comment: '',
-    rate:''
+    rate:'10'
   };
 
 
