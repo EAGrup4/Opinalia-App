@@ -29,6 +29,8 @@ import {HttpHeaders} from "@angular/common/http";
 export class User {
   _user: any;
 
+
+
   constructor(public api: Api) { }
 
   /**
@@ -74,7 +76,6 @@ export class User {
     let token = user.token;
     let headers = new HttpHeaders();
     headers = headers.append("Authorization", token);
-    console.log(headers);
     let seq = this.api.post(`users/`+userId, accountInfo, {headers:headers}).share();
 
     seq.subscribe((res: any) => {
@@ -122,7 +123,25 @@ export class User {
 
     return seq;
   }
-  
+
+  loginFB(user:any){
+    let token = user.token;
+    let headers = new HttpHeaders();
+    headers = headers.append("Authorization", token);
+    let seq = this.api.post(`users/loginFB`,user, {headers:headers}).share();
+
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      if (res.code == 'success') {
+        console.log("ok");
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
   password(email:any){
     let seq = this.api.post(`users/auth/forgotPassword`, email).share();
 
@@ -134,10 +153,10 @@ export class User {
     }, err => {
       console.error('ERROR', err);
     });
-   
+
    return seq;
   }
-  
+
   /**
    * Log the user out, which forgets the session
    */

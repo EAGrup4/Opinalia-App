@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import {IonicPage, ModalController, NavController, ToastController} from 'ionic-angular';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import {User} from "../../providers/providers";
+import {Storage} from "@ionic/storage";
+import {MainPage} from "../pages";
 
 /**
  * The Welcome Page is a splash page that quickly describes the app,
@@ -20,7 +23,12 @@ export class WelcomePage {
 
 
 
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController,public modalCtrl: ModalController,private fb: Facebook) {
+  constructor(public navCtrl: NavController,
+              public toastCtrl: ToastController,
+              public modalCtrl: ModalController,
+              public user: User,
+              private storage:Storage,
+              private fb: Facebook) {
 
   }
 
@@ -44,16 +52,41 @@ export class WelcomePage {
 
   fbLogin(){
     this.fb.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
-      this.fb.api('me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture_large)',
+      console.log(response)
+      var token:any=response.authResponse.accessToken;
+      this.fb.api('me?fields=id,name,email,first_name,picture.width(300).height(300)',
         []).then(profile => {
-          console.log("Hola")
-          console.log("profile", profile)
-        let toast = this.toastCtrl.create({
-          message: "Ya has valorado este producto",
-          duration: 3000,
-          position: 'top'
+          let prof:any;
+          prof=profile
+          console.log("Profile",prof)
+          let user:any={};
+          user.email=prof.email;
+          user.name=prof.name;
+          user.token=token;
+          user.profileImage=prof.picture.data.url;
+
+        this.user.loginFB(user).subscribe((resp) => {
+          let newUser:any;
+          newUser=resp;
+          this.storage.set('user', newUser);
+          this.navCtrl.push(MainPage);
+          /*let toast = this.toastCtrl.create({
+            message: "Usuario actualizado",
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present();*/
+        }, (err) => {
+          // Unable to log in
+          let toast = this.toastCtrl.create({
+            message: "Error al iniciar sesión con Facebook",
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present();
         });
-        toast.present();
+          console.log("profile", user);
+
       });
     });
 
