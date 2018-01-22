@@ -9,7 +9,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { Items } from '../providers/items/items';
 import { Settings } from '../providers/providers';
 import { User } from '../providers/providers';
@@ -43,6 +43,7 @@ export function provideSettings(storage: Storage) {
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
