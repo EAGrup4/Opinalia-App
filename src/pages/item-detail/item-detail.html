@@ -15,8 +15,8 @@
 <ion-content>
   <ion-card >
     <ion-item color="white">
-      <ion-slides class="photo" pager zoom *ngIf="currentItem?.images?.length>0">
-        <ion-slide *ngFor="let image of currentItem?.images" height="400" width="400">
+      <ion-slides class="photo" height="400" width="400" pager zoom *ngIf="currentItem?.images?.length>0">
+        <ion-slide *ngFor="let image of currentItem?.images">
           <img src={{image.src}} height="400" width="400">
         </ion-slide>
       </ion-slides>

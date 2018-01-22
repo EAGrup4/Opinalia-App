@@ -11,9 +11,12 @@ page-item-detail {
     background: white;
     position: absolute;
   }
-  .photo img{
-    text-align: center;
-    margin: 0 auto;
-
+  .photo img {
+    margin: 0 auto !important;
+    min-width: 100%;
+    /*width: 400px !important;
+    height: 400px !important;
+    max-width: 400px !important;
+    max-height: 400px !important;*/
   }
 }
