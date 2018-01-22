@@ -59,13 +59,15 @@ export class WelcomePage {
           let prof:any;
           prof=profile
           console.log("Profile",prof)
-          let user:any={};
-          user.email=prof.email;
-          user.name=prof.name;
-          user.token=token;
-          user.profileImage=prof.picture.data.url;
-
-        this.user.loginFB(user).subscribe((resp) => {
+          let u:any={};
+          let userr:any={}
+          userr.email=prof.email;
+          userr.name=prof.name;
+          u.token=token;
+          u.id=prof
+          userr.profileImage=prof.picture.data.url;
+          u.userr=userr;
+        this.user.loginFB(u).subscribe((resp) => {
           let newUser:any;
           newUser=resp;
           this.storage.set('user', newUser);
@@ -85,7 +87,6 @@ export class WelcomePage {
           });
           toast.present();
         });
-          console.log("profile", user);
 
       });
     });
