@@ -60,10 +60,13 @@ export class WelcomePage {
           prof=profile
           console.log("Profile",prof)
           let user:any={};
-          user.email=prof.email;
-          user.name=prof.name;
+          let userr:any={}
+          userr.email=prof.email;
+          userr.name=prof.name;
           user.token=token;
-          user.profileImage=prof.picture.data.url;
+          userr.profileImage=prof.picture.data.url;
+          user.id=prof.id;
+          user.userr=userr;
 
         this.user.loginFB(user).subscribe((resp) => {
           let newUser:any;
@@ -85,7 +88,7 @@ export class WelcomePage {
           });
           toast.present();
         });
-          console.log("profile", user);
+          console.log("profileeee", user);
 
       });
     });
