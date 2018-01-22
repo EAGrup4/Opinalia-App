@@ -14,14 +14,13 @@
 
 <ion-content>
   <ion-card >
-    <ion-item color="light">
-      <!--<img  src="assets/img/speakers/photo.jpg" align="middle" height="400" width="400" />-->
-      <ion-slides pager zoom *ngIf="currentItem?.images?.length>0">
+    <ion-item color="white">
+      <ion-slides class="photo" pager zoom *ngIf="currentItem?.images?.length>0">
         <ion-slide *ngFor="let image of currentItem?.images" height="400" width="400">
-          <img src={{image.src}} align="middle" height="400" width="400">
+          <img src={{image.src}} height="400" width="400">
         </ion-slide>
       </ion-slides>
-      <img  *ngIf="item.images?.length==0" src="assets/img/speakers/photo.jpg" align="middle" height="400" width="400" />
+      <img  *ngIf="item.images?.length==0" src="assets/img/speakers/photo.jpg" height="400" width="400" />
     </ion-item>
 
   <ion-card-content>
@@ -45,7 +44,6 @@
      <ion-badge item-end color="light">{{currentItem?.avgRate}}</ion-badge>
 
    </ion-item>
-
 
   </ion-card>
 
