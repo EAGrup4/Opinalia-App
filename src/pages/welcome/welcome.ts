@@ -88,7 +88,6 @@ export class WelcomePage {
           });
           toast.present();
         });
-          console.log("profileeee", user);
 
       });
     });
